@@ -13,7 +13,7 @@ const Passageiros = () => {
   const renderFooter = () => {
     return (
       <View style={styles.view}>
-        <ActivityIndicator size="small" color="#00FF7F"/>
+        <ActivityIndicator size="large" color="#00FF7F"/>
       </View>
     );
   }
@@ -23,6 +23,7 @@ const Passageiros = () => {
       .then((response) => {
         setPassageiros(response.data.data);
         setTamanho(tamanho + 5);
+        console.log(tamanho);
       }).catch(function (error) {
         alert(error);
       });

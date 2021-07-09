@@ -24,7 +24,7 @@ const Passageiros = () => {
         setPassageiros(response.data.data);
         setTamanho(tamanho + 5);
       }).catch(function (error) {
-        console.log(error);
+        alert(error);
       });
   }
 

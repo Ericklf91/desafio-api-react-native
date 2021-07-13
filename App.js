@@ -5,6 +5,7 @@ import { ActivityIndicator, StyleSheet, FlatList, View, Text, Image } from 'reac
 const Passageiros = () => {
   const [passageiros, setPassageiros] = useState([]);
   const [tamanho, setTamanho] = useState(10);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getPassageiros();
@@ -13,19 +14,23 @@ const Passageiros = () => {
   const renderFooter = () => {
     return (
       <View style={styles.view}>
-        <ActivityIndicator size="large" color="#00FF7F"/>
+        {isLoading &&
+          <ActivityIndicator size="large" color="#00FF7F" />
+        }
       </View>
     );
   }
 
   const getPassageiros = () => {
+    setIsLoading(true);
     axios.get(`https://api.instantwebtools.net/v1/passenger?page=0&size=${tamanho}`)
       .then((response) => {
         setPassageiros(response.data.data);
         setTamanho(tamanho + 5);
-        console.log(tamanho);
+        setIsLoading(false);
       }).catch(function (error) {
         alert(error);
+        setIsLoading(false);
       });
   }
 
